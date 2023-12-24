@@ -1,0 +1,124 @@
+====================procedure====================
+create or replace PROCEDURE GETUSERBYEMAIL(p_email varchar2) AS 
+c1 sys_refcursor;
+BEGIN
+  open c1 for
+  Select name,email from Employee where email = p_email;
+
+  dbms_sql.return_result(c1);
+END;
+===================================================
+
+# swagger-ui custom path
+#springdoc.swagger-ui.path=/swagger-ui.html
+http://localhost:9090/swagger-ui.html
+
+
+#POST
+http://localhost:9090/api/employees
+Request
+{
+  "name": "vishal",
+  "gender": "M",
+  "email": "vishal@gmail.com",
+  "dateOfBirth": "2020-12-17",
+  "phone": 87656,
+  "mobileNo": 9876545667
+}
+
+Response
+{
+  "id": 1,
+  "name": "vishal",
+  "gender": "M",
+  "email": "vishal@gmail.com",
+  "dateOfBirth": "2020-12-17",
+  "phone": 87656,
+  "mobileNo": 9876545667,
+  "active": null,
+  "createDate": "2023-12-17",
+  "updatedOn": "2023-12-17T15:48:56.360559"
+}
+====================================================
+#POST
+#http://localhost:9090/api/employees/all
+request
+[
+  {
+  "name": "nisha",
+  "gender": "F",
+  "email": "nisha@gmail.com",
+  "dateOfBirth": "2018-11-05",
+  "phone": 87656,
+  "mobileNo": 98767898789,
+  "active": true
+  },
+ {
+  "name": "ram",
+  "gender": "M",
+  "email": "ram@gmail.com",
+  "dateOfBirth": "1996-04-05",
+  "phone": 45666,
+  "mobileNo": 4567656545656,
+  "active": true
+  }
+]
+response
+[
+  {
+    "id": 2,
+    "name": "nisha",
+    "gender": "F",
+    "email": "nisha@gmail.com",
+    "dateOfBirth": "2018-11-05",
+    "phone": 87656,
+    "mobileNo": 98767898789,
+    "active": true,
+    "createDate": "2023-12-17",
+    "updatedOn": "2023-12-17T16:22:44.093868"
+  },
+  {
+    "id": 3,
+    "name": "ram",
+    "gender": "M",
+    "email": "ram@gmail.com",
+    "dateOfBirth": "1996-04-05",
+    "phone": 45666,
+    "mobileNo": 4567656545656,
+    "active": true,
+    "createDate": "2023-12-17",
+    "updatedOn": "2023-12-17T16:22:44.108887"
+  }
+]
+==================================================
+#GET
+http://localhost:9090/api/employees
+http://localhost:9090/api/employees/name-ascc
+http://localhost:9090/api/employees/name-asc
+http://localhost:9090/api/employees/1
+http://localhost:9090/api/employees/email/nisha@gmail.com
+http://localhost:9090/api/employees/email1/nisha@gmail.com
+http://localhost:9090/api/employees/email2/nisha@gmail.com
+http://localhost:9090/api/employees/email3/nisha@gmail.com
+http://localhost:9090/api/employees/email4/nisha@gmail.com
+http://localhost:9090/api/employees/emailProcedure/nisha@gmail.com
+
+dob between --
+http://localhost:9090/api/employees/dob/2016-01-01/2019-01-01
+
+#put
+http://localhost:9090/api/employees/1
+{
+  "id": 1,
+  "name": "vishal",
+  "gender": "M",
+  "email": "vishal@gmail.com",
+  "dateOfBirth": "2020-12-17",
+  "phone": 87656,
+  "mobileNo": 9876545667,
+  "active": true
+}
+
+#Delete
+http://localhost:9090/api/employees?id=1
+
