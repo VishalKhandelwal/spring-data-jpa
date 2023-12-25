@@ -1,0 +1,35 @@
+
+# swagger-ui custom path
+#springdoc.swagger-ui.path=/swagger-ui.html
+http://localhost:9090/swagger-ui.html
+
+http://localhost:9090/api/order
+#post
+{
+  "orderTrackingNumber": "1000",
+  "totalQuantity": 5,
+  "totalPrice": 2000,
+  "status": "COMPLETED",
+  "billingAddress": {
+    "street": "kothrud",
+    "city": "pune",
+    "state": "Maharashra",
+    "country": "India",
+    "zipCode": "11048"
+  }
+}
+
+#get
+http://localhost:9090/api/order/21
+
+#put
+http://localhost:9090/api/order/21
+{
+  "status": "DELIVERED",
+  "billingAddress": {
+    "zipCode": "11047"
+  }
+}
+
+#delete
+http://localhost:9090/api/order?id=21
